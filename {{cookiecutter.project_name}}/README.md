@@ -1,21 +1,31 @@
-ML_emptyProject
+## ML_emptyProject
 ==============================
 
 A micro-framework project build on cookiecutter datascience template
 
+## Usage
+==============================
+
+Make sure you have a working Python instance on your system
+
+### 1.Install cookiecutter
+    pip install -U cookiecutter
+
+### 2. Get template
+    cookiecutter http://s-tfs1:8080/tfs/RD/FuturMaster/_git/mico-service-ml-project_template
+
 Project Organization
 ------------
-
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
+    ├── controllers        <- The Flask wrapper for the web REST API 
+    │   ├── app.py         <- The main Flask application file (to use in dev environement)  
+    │   ├── server.py      <- The production ready WGSI server (to use in production environement)
     ├── data
     │   ├── external       <- Data from third party sources.
     │   ├── interim        <- Intermediate data that has been transformed.
     │   ├── processed      <- The final, canonical data sets for modeling.
     │   └── raw            <- The original, immutable data dump.
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    ├── docs               <- docs and references
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
@@ -30,27 +40,29 @@ Project Organization
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
     │                         generated with `pip freeze > requirements.txt`
+    ├── spec-file.txt      <- The requirements file for reproducing the conda environment, e.g.
+    │                         generated with `conda list --export > spec-file.txt`
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
+    │   ├── __init__.py    <- Makes src a Python module (src is replace by the package name)
+    │   │	
+    │   └── configuration  <- Configuration and global settings files (including logging)
     │   │
     │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
+    │   │
+    │   ├── external       <- External scripts used in the package
     │   │
     │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
     │   │
     │   ├── models         <- Scripts to train models and then use trained models to make
     │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
+    │   │
+    │   ├── tests          <- test scripts folder
     │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
-
+    ├── VERSION            <- flat text file to keep track of the package version
+    ├── README.md          <- The top-level README for developers using this project.
 
 --------
 
