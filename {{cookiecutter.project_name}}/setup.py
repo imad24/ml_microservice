@@ -1,5 +1,8 @@
 from setuptools import find_packages, setup
 
+with open('VERSION') as version_file:
+    version = version_file.read().strip()
+
 setup(
     name='{{cookiecutter.package_name}}',
     packages=find_packages(),
