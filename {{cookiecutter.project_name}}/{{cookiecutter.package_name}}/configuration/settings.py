@@ -16,26 +16,18 @@ load_dotenv(find_dotenv())
 global app_dir
 global logging_level
 app_dir = os.path.normpath(os.getenv("APPPATH"))
+source_directory = os.path.normpath(os.getenv("SHAREDFOLDER"))
 logging_level = logging.INFO
 
+globalConfigFile = os.path.join(app_dir,'config.json')
+userConfigFile = os.path.join(source_directory,'config.json')
+options = {}
 
-
-def init(working_directory=None):
+def init():
     
     global globalConfigFile
     global userConfigFile
     global options
-
-    # global path
-    app_dir = os.path.normpath(os.getenv("APPPATH"))
-    
-
-    source_directory = os.path.normpath(os.getenv("SHAREDFOLDER"))
-
-    globalConfigFile = os.path.join(app_dir,'config.json')
-    userConfigFile = os.path.join(source_directory,'config.json')
-    #set folders structure
-    _set_folders(source_directory, working_directory = working_directory)
 
     # load global settings from config file
     cfg_file = globalConfigFile
@@ -86,20 +78,15 @@ def get_logger(name):
 
     return logger
     
-
-
-
-
-
 def set_user_config_file(filepath):
 	global options
 	userConfigFile = filepath
 	if os.path.isfile(userConfigFile): 
 		cfg_file = userConfigFile 
 	with open(cfg_file) as cfg:
-        options = json.load(cfg)
+                options = json.load(cfg)
 	if "log_level" in options:
-        _set_logging_level(options["log_level"])
+                _set_logging_level(options["log_level"])
     
 def _set_logging_level(verbose):
         global logging_level
@@ -118,8 +105,6 @@ def _set_logging_level(verbose):
                 logging_level = levels[alias[verbose]]
 
 def get_option(key):
-        #checking if the app is correctly set for this instance run
-        test_setting()
         return options.get(key, None)
 
 def set_options(options):
