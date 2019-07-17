@@ -104,8 +104,8 @@ def _set_logging_level(verbose):
         elif verbose in range(len(levels)):
                 logging_level = levels[alias[verbose]]
 
-def get_option(key):
-        return options.get(key, None)
+def get_option(key, default=None):
+        return options.get(key, default)
 
 def set_options(options):
     with open(userConfigFile, 'w') as cfg:
