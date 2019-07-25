@@ -10,37 +10,44 @@ import json
 from dotenv import find_dotenv, load_dotenv
 import datetime
 
-load_dotenv(find_dotenv())
+
 
 #Setting the app directory
-global app_dir
-global logging_level
-app_dir = os.path.normpath(os.getenv("APPPATH"))
-source_directory = os.path.normpath(os.getenv("SHAREDFOLDER"))
+app_dir= None
 logging_level = logging.INFO
+globalConfigFile = None
+userConfigFile = None
 
-globalConfigFile = os.path.join(app_dir,'config.json')
-userConfigFile = os.path.join(source_directory,'config.json')
 options = {}
 
 def init():
-    
-    global globalConfigFile
-    global userConfigFile
-    global options
 
-    # load global settings from config file
-    cfg_file = globalConfigFile
+        load_dotenv(find_dotenv())
 
-    #set user config file
-    if os.path.isfile(userConfigFile): 
-            cfg_file = userConfigFile 
-    
-    with open(cfg_file) as cfg:
-        options = json.load(cfg)
+        global app_dir
 
-    if "log_level" in options:
-        _set_logging_level(options["log_level"])
+        global globalConfigFile
+        global userConfigFile
+        global options
+
+        app_dir = os.path.normpath(os.getenv("APPPATH"))
+        source_directory = os.path.normpath(os.getenv("SHAREDFOLDER"))
+
+        globalConfigFile = os.path.join(app_dir,'config.json')
+        userConfigFile = os.path.join(source_directory,'config.json')
+
+        # load global settings from config file
+        cfg_file = globalConfigFile
+
+        #set user config file
+        if os.path.isfile(userConfigFile): 
+                cfg_file = userConfigFile 
+
+        with open(cfg_file) as cfg:
+                options = json.load(cfg)
+
+        if "log_level" in options:
+                _set_logging_level(options["log_level"])
 
 def get_logger(name):
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -78,6 +85,18 @@ def get_logger(name):
 
     return logger
     
+def load_json_file(filename):
+        # ignore .json extension if provided
+        base_filename = str(filename).split(".")[0]
+        #get current directory (configuration)
+        dirpath = os.path.dirname(os.path.realpath(__file__))
+        #build the full path to the local json file
+        full_filepath = os.path.join(dirpath, base_filename + ".json")
+        with open(full_filepath) as filecontent:
+                data = json.load(filecontent)
+                return data     
+
+
 def set_user_config_file(filepath):
 	global options
 	userConfigFile = filepath
@@ -110,6 +129,7 @@ def get_option(key, default=None):
 def set_options(options):
     with open(userConfigFile, 'w') as cfg:
         json.dump(options, cfg)
-      
-if __name__ == '__main__':
-    init()
+
+
+#init configuration
+init()

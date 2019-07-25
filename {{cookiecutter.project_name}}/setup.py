@@ -11,6 +11,7 @@ setup(
     author='{{cookiecutter.author}}',
     license='',
     python_requires='>=3',
+    package_data={'fmdemandsensing': ['configuration/*.json']},
     install_requires=['numpy', 'pandas','scikit-learn'],
     classifiers=[
     'Development Status :: 3 - Alpha',
