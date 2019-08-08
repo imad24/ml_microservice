@@ -1,0 +1,40 @@
+resources:
+  - repo: self
+    clean: true
+phases:
+  - phase: Phase_1
+    displayName: Docker Image Build
+    queue:
+      name: CI-linux-build-agents
+    steps:
+      - task: Docker@1
+        displayName: 'Build Miniconda Python 3.6 Docker Image'
+        inputs:
+          containerregistrytype: 'Container Registry'
+
+          dockerRegistryEndpoint: dockerPrivateRegistry
+
+          dockerFile: 'dockerFile'
+
+          useDefaultContext: true
+
+          addDefaultLabels: false
+
+          imageName: miniconda_py36
+          
+          restartPolicy: always
+
+        enabled: true
+
+      - task: Docker@1
+        displayName: 'Push the image'
+        inputs:
+          containerregistrytype: 'Container Registry'
+
+          dockerRegistryEndpoint: dockerPrivateRegistry
+
+          command: 'Push an image'
+
+          imageName: miniconda_py36
+
+        enabled: true

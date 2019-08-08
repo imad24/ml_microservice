@@ -1,0 +1,31 @@
+#FROM python:3
+FROM continuumio/miniconda3
+
+#Prepare the working directory and env variables
+WORKDIR /work
+
+#create a conda env
+ENV PATH /opt/conda/bin:$PATH
+ENV PATH /opt/conda/scripts:$PATH
+RUN conda create -n prod python=3.6
+RUN echo "source activate prod" > ~/.bashrc
+ENV PATH /opt/conda/envs/prod/bin:$PATH
+
+RUN conda install -n prod -c conda-forge fbprophet
+
+
+#install the pip requirements
+#TODO: Update this with requirements.txt later
+#TODO: RUN python -m pip install --upgrade pip
+RUN python -m pip install --index-url=https://FuturMaster:fx6n57ypj7shi6eojslh3mb2fyoqsugtmxjqdo5az3mnnlaupsva@pkgs.dev.azure.com/FuturMaster/_packaging/FuturMaster/pypi/simple/ fmml_tk==0.2.9
+RUN python -m pip install python-dotenv
+RUN python -m pip install dill
+
+#Flask requirements
+RUN python -m pip install flask
+RUN python -m pip install Flask-Cors
+RUN python -m pip install waitress
+RUN python -m pip install py-eureka-client
+RUN python -m pip install statsmodels
+RUN python -m pip install pyentrp
+RUN python -m pip install sampen
