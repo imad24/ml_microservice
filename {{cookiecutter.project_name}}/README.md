@@ -12,7 +12,7 @@ Make sure you have a working Python instance on your system
     pip install -U cookiecutter
 
 ### 2. Get template
-    cookiecutter http://s-tfs1:8080/tfs/RD/FuturMaster/_git/mico-service-ml-project_template
+    cookiecutter https://github.com/imad24/ml_microservice.git
 
 Project Organization
 ------------
