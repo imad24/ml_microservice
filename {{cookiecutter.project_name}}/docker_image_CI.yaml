@@ -14,7 +14,7 @@ phases:
 
           dockerRegistryEndpoint: dockerPrivateRegistry
 
-          dockerFile: 'dockerFile'
+          dockerFile: '{{cookiecutter.package_name}}/dockerFile'
 
           useDefaultContext: true
 
