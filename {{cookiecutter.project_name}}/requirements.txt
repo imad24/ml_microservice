@@ -8,7 +8,6 @@ ephem==3.7.6.0
 fbprophet==0.5
 Flask==1.1.1
 Flask-Cors==3.0.8
-fmml-tk==0.2.9
 holidays==0.9.11
 itsdangerous==1.1.0
 Jinja2==2.10.1
