@@ -90,3 +90,5 @@ models/*
 # vim
 *.swp
 *.swo
+
+docker_image_CI.yaml

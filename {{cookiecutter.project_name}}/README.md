@@ -16,8 +16,8 @@ Make sure you have a working Python instance on your system
 
 Project Organization
 ------------
-    ├── controllers        <- The Flask wrapper for the web REST API 
-    │   ├── app.py         <- The main Flask application file (to use in dev environement)  
+    ├── webApi        <- The Flask wrapper for the web REST API 
+    │   ├── controllers    <- controllers files including the main app.py 
     │   ├── server.py      <- The production ready WGSI server (to use in production environement)
     ├── data
     │   ├── external       <- Data from third party sources.
